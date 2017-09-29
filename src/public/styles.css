@@ -3,5 +3,28 @@ html {
 }
 
 body {
-  background-color: white;
+  background-color: rgb(250,250,250);
+  margin: 0px;
+}
+
+.TopMenu {
+  width: 100vw;
+  height: 56px;
+  position: fixed;
+  top: 0;
+  padding: 0px 16px;
+  background-color: rgb(255,255,255);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.VideoGrid {
+  width: 100vw;
+  height: 200px;
+  background-color: rgb(250,250,250);
+  margin-top: 56px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

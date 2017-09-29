@@ -1,8 +1,15 @@
 import React from 'react';
 
+import TopMenu from './TopMenu';
+import VideoGrid from './VideoGrid'
+
 const App = () => (
-  <div>
-    <h1>yuotube</h1>
+  <div className='App'>
+
+    <TopMenu />
+
+    <VideoGrid />
+
   </div>
 )
 
