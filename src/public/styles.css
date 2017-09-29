@@ -1,14 +1,30 @@
-html {
+/*html {
   height: 100%;
-}
+}*/
 
 body {
   background-color: rgb(250,250,250);
   margin: 0px;
 }
 
+.App {
+
+}
+
+.fa-1x {
+  font-size: 0.99999999em;
+  line-height: 0.75em;
+  vertical-align: -15%;
+}
+
+.fa-med {
+  font-size: 1.66666666em !important;
+  line-height: .75em;
+  vertical-align: -15%;
+}
+
 .TopMenu {
-  width: 100vw;
+  width: 100%;
   height: 56px;
   position: fixed;
   top: 0;
@@ -17,6 +33,85 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-sizing: border-box;
+  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);
+}
+
+.topMenu-title {
+  background-color: white;
+  display: flex;
+  align-items: center;
+  margin-right: 8px;
+}
+
+.topMenu-titleBurger {
+  -webkit-text-stroke: 1px rgb(255,255,255);
+  color: rgb(160,160,160);
+  margin-right: 16px;
+  height: 40px;
+  width: 40px;
+  padding: 8px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.topMenu-youtubeLogo {
+  color: red;
+}
+
+.TopMenu span {
+  font-family: 'Pathway Gothic One', sans-serif;
+  font-size: 24px;
+  letter-spacing: -1.5px;
+  margin-left: 2px;
+}
+
+.topMenu-searchBar {
+  width: 100%;
+  max-width: 656px;
+  height: 32px;
+  margin: 0 40px;
+  display: flex;
+  flex-direction: row;
+  border: solid 1px rgb(204,204,204);
+  border-radius: 2px;
+}
+
+.topMenu-searchBar input {
+  width: 100%;
+  padding: 2px 6px;
+  border: none;
+  box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+  border-right: solid 1px rgb(204,204,204);
+}
+
+.topMenu-searchBarSearchButton {
+  min-width: 65px;
+  background-color: rgb(248,248,248);
+  color: rgb(160,160,160);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.topMenu-navigationButton {
+  min-width: 225px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: rgb(160,160,160);
+  box-sizing: border-box;
+  padding: 0 17px 0 8px;
+}
+
+.topMenu-navigationButton span {
+  color: red;
+  font-family: 'Pathway Gothic One', sans-serif;
+  font-size: 16px;
+  letter-spacing: 1px;
 }
 
 .VideoGrid {
