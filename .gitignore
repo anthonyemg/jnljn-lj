@@ -6,5 +6,9 @@ node_modules/
 
 .env
 
+## API keys ##
+src/config/youtube.js
+compiled/config/youtube.js
+
 # bundle
 src/public/dist/
