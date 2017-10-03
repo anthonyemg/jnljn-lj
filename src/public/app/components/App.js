@@ -18,6 +18,8 @@ class App extends React.Component {
       selectedVideoRelatedVideos: null,
       trendingVideos: null,
       popularMusicVideos: null,
+      movieTrailers: null,
+      lateNight: null,
     }
     this.handleVideoListUpdate = this.handleVideoListUpdate.bind(this);
     this.numberWithCommas = this.numberWithCommas.bind(this);
@@ -26,11 +28,15 @@ class App extends React.Component {
     this.fetchRelatedVideos = this.fetchRelatedVideos.bind(this);
     this.fetchTrending = this.fetchTrending.bind(this);
     this.fetchPopularMusicVideos = this.fetchPopularMusicVideos.bind(this);
+    this.fetchMovieTrailers = this.fetchMovieTrailers.bind(this);
+    this.fetchLateNight = this.fetchLateNight.bind(this);
   }
 
   componentWillMount() {
     this.fetchTrending();
     this.fetchPopularMusicVideos();
+    this.fetchMovieTrailers();
+    this.fetchLateNight();
   }
 
   componentDidMount() {
@@ -100,7 +106,6 @@ class App extends React.Component {
     })
     .then(res => res.json())
     .then(data => {
-      console.log('trending', data.items)
       this.setState({
         trendingVideos: data.items,
       })
@@ -119,6 +124,28 @@ class App extends React.Component {
       .catch(err => console.log(err));
   }
 
+  fetchMovieTrailers() {
+    fetch('/movie/trailers', {method: 'GET'})
+      .then(res => res.json())
+      .then(data => {
+        this.setState({
+          movieTrailers: data.items
+        })
+      })
+      .catch(err => console.log(err));
+  }
+
+  fetchLateNight() {
+    fetch('/latenight', {method: 'GET'})
+      .then(res => res.json())
+      .then(data => {
+        this.setState({
+          lateNight: data.items
+        })
+      })
+      .catch(err => console.log(err));
+  }
+
 
   render() {
     return (
@@ -130,7 +157,7 @@ class App extends React.Component {
 
         <TopMenuMobile />
 
-        {this.state.trendingVideos && this.state.popularMusicVideos && !this.state.videos &&
+        {this.state.trendingVideos && this.state.popularMusicVideos && this.state.movieTrailers && this.state.lateNight && !this.state.videos &&
           <div>
             <LandingVideoList
               videos={this.state.trendingVideos}
@@ -140,8 +167,14 @@ class App extends React.Component {
               videos={this.state.popularMusicVideos}
               title='Popular Music Videos by Music'
             />
-
-
+            <LandingVideoList
+              videos={this.state.movieTrailers}
+              title='Trailers by Movies - Topic'
+            />
+            <LandingVideoList
+              videos={this.state.lateNight}
+              title='Catch Up on Late Night by Popular on YouTube'
+            />
           </div>
         }
 

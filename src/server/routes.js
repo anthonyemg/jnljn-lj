@@ -58,4 +58,28 @@ routes.get('/popular/musicvideos', function(req, res) {
     })
 })
 
+//Channel 'Movies - Topic'
+//Playlist 'Trailers'
+routes.get('/movie/trailers', function(req, res) {
+  request.get('https://www.googleapis.com/youtube/v3/playlistItems?' +
+    'part=snippet,contentDetails&maxResults=20' +
+    '&playlistId=PLzjFbaFzsmMT_VuMSVQxfkQIw7VNbHyVi' +
+    '&key=' + process.env.YOUTUBE_API_KEY,
+    function(e, r, data) {
+      res.send(data)
+    })
+})
+
+//Channel 'Popular on YouTube'
+//Playlist 'Catch Up on Late Night'
+routes.get('/latenight', function(req, res) {
+  request.get('https://www.googleapis.com/youtube/v3/playlistItems?' +
+    'part=snippet,contentDetails&maxResults=20' +
+    '&playlistId=PLrEnWoR732-CN09YykVof2lxdI3MLOZda' +
+    '&key=' + process.env.YOUTUBE_API_KEY,
+    function(e, r, data) {
+      res.send(data)
+    })
+})
+
 module.exports = routes;
