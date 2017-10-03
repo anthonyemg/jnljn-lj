@@ -12,12 +12,10 @@ class App extends React.Component {
     this.state = {
       videos: null,
     }
-
     this.handVideoListUpdate = this.handVideoListUpdate.bind(this);
   }
 
   handVideoListUpdate(videos) {
-    console.log('setting state', videos)
     this.setState({
       videos: videos,
     })

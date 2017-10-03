@@ -7,7 +7,6 @@ class VideoGrid extends React.Component {
   }
 
   render() {
-    console.log('viddeosssssss', this.props.videos)
     return (
       <div className='VideoGrid'>
         {
@@ -24,7 +23,7 @@ class VideoGrid extends React.Component {
       </div>
     )
   }
-  
+
 }
 
 export default VideoGrid;
