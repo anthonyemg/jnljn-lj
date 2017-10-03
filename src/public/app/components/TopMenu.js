@@ -4,20 +4,19 @@ class TopMenu extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      key: 'AIzaSyCOc0Jc2tV0X6pAjFeSm0-iN2N8VM0mQwk',
-    }
     this.searchYouTube = this.searchYouTube.bind(this);
   }
 
   searchYouTube () {
-    fetch('https://www.googleapis.com/youtube/v3/search?key=' + this.state.key + '&part=snippet,id&order=date&maxResults=20')
+
+    fetch('https://www.googleapis.com/youtube/v3/search?key=' + '' + '&part=snippet,id&order=date&maxResults=20')
        .then(resp => resp.json())
        .then((resp) => {
-         console.log('wooo', resp);
+         console.log('wooo', resp.items);
          //this.setState({video: resp.results});
-         this.setState({video: resp.items});
-         console.log(this.state.video);
+        //  this.setState({video: resp.items});xx
+        //  console.log(this.state.video);
+         this.props.handVideoListUpdate(resp.items);
        })
 
         // .then(res => res.json())
@@ -25,22 +24,6 @@ class TopMenu extends React.Component {
         //   console.log('woo',data)
         // })
         .catch(err => console.log('errrorr',err));
-
-    // fetch.get('https://www.googleapis.com/youtube/v3/search', {
-    //   part: 'snippet',
-    //   key: this.state.key,
-    //   q: 'apple',
-    //   maxResults: 5,
-    //   type: 'video',
-    //   videoEmbeddable: 'true'
-    // })
-    // .done(({items}) => {
-    //   if (callback) {
-    //     callback(items);
-    //   }
-    // })
-
-
   };
 
   render() {

@@ -4,16 +4,38 @@ import TopMenu from './TopMenu';
 import TopMenuMobile from './TopMenuMobile';
 import VideoGrid from './VideoGrid';
 
-const App = () => (
-  <div className='App'>
 
-    <TopMenu />
+class App extends React.Component {
 
-    <TopMenuMobile />
+  constructor(props) {
+    super(props);
+    this.state = {
+      videos: null,
+    }
 
-    <VideoGrid />
+    this.handVideoListUpdate = this.handVideoListUpdate.bind(this);
+  }
 
-  </div>
-)
+  handVideoListUpdate(videos) {
+    console.log('setting state', videos)
+    this.setState({
+      videos: videos,
+    })
+  }
+
+  render() {
+    return (
+      <div className='App'>
+
+        <TopMenu handVideoListUpdate={this.handVideoListUpdate} />
+
+        <TopMenuMobile />
+
+        <VideoGrid videos={this.state.videos} />
+
+      </div>
+    )
+  }
+}
 
 export default App;

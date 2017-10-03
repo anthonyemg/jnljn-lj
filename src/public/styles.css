@@ -154,6 +154,15 @@ body {
   border-bottom: solid 1px rgb(197,197,197);
 }
 
+.VideoGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 30vw);
+  grid-template-rows: repeat(5, 30vw);
+  grid-gap: 28px;
+  /*margin: 0 auto;*/
+  min-width: 300px;
+}
+
 
 @media (max-width: 725px) {
   .TopMenuMobile {
