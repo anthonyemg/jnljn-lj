@@ -25,17 +25,12 @@ routes.post('/comments', function(req, res) {
 
 routes.post('/relatedvideos', function(req, res) {
   request.get('https://www.googleapis.com/youtube/v3/search?' +
-    'part=snippet&type=video' +
+    'part=snippet&type=video&maxResults=20' +
     '&relatedToVideoId=' + req.body.data +
     '&key=' + process.env.YOUTUBE_API_KEY,
     function(e, r, data) {
-      console.log('WOOO', data)
       res.send(data)
     })
 })
-
-
-
-
 
 module.exports = routes;

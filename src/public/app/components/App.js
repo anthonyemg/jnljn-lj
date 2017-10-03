@@ -15,6 +15,7 @@ class App extends React.Component {
       videoMode: false,
       selectedVideo: null,
       selectedVideoComments: null,
+      selectedVideoRelatedVideos: null,
     }
     this.handleVideoListUpdate = this.handleVideoListUpdate.bind(this);
     this.numberWithCommas = this.numberWithCommas.bind(this);
@@ -71,10 +72,10 @@ class App extends React.Component {
     })
     .then(res => res.json())
     .then(data => {
-      console.log('wow dude', data)
-      // this.setState({
-      //   selectedVideoComments: data.items,
-      // })
+      console.log('wow dude', data.items)
+      this.setState({
+        selectedVideoRelatedVideos: data.items,
+      })
     })
     .catch(err => console.log(err));
   }
@@ -101,6 +102,7 @@ class App extends React.Component {
             selectedVideo={this.state.selectedVideo}
             handleSelectVideo={this.handleSelectVideo}
             selectedVideoComments={this.state.selectedVideoComments}
+            selectedVideoRelatedVideos={this.state.selectedVideoRelatedVideos}
           />
         }
 
