@@ -4,6 +4,7 @@ import TopMenu from './TopMenu';
 import TopMenuMobile from './TopMenuMobile';
 import VideoList from './VideoList';
 import VideoPlayer from './VideoPlayer';
+import LandingVideoList from './LandingVideoList';
 
 class App extends React.Component {
 
@@ -12,22 +13,30 @@ class App extends React.Component {
     this.state = {
       videos: null,
       resultsNumber: 0,
-      videoMode: false,
       selectedVideo: null,
       selectedVideoComments: null,
       selectedVideoRelatedVideos: null,
       trendingVideos: null,
+      popularMusicVideos: null,
     }
     this.handleVideoListUpdate = this.handleVideoListUpdate.bind(this);
     this.numberWithCommas = this.numberWithCommas.bind(this);
     this.handleSelectVideo = this.handleSelectVideo.bind(this);
     this.handleFetchComments = this.handleFetchComments.bind(this);
-    this.handleFetchRelatedVideos = this.handleFetchRelatedVideos.bind(this);
-    this.handleFetchTrending = this.handleFetchTrending.bind(this);
+    this.fetchRelatedVideos = this.fetchRelatedVideos.bind(this);
+    this.fetchTrending = this.fetchTrending.bind(this);
+    this.fetchPopularMusicVideos = this.fetchPopularMusicVideos.bind(this);
   }
 
   componentWillMount() {
-    this.handleFetchTrending();
+    this.fetchTrending();
+    this.fetchPopularMusicVideos();
+  }
+
+  componentDidMount() {
+    this.setState({
+      landingVideoList: true,
+    })
   }
 
   handleVideoListUpdate(data) {
@@ -52,7 +61,7 @@ class App extends React.Component {
       selectedVideo: video,
     })
     this.handleFetchComments(video.id.videoId)
-    this.handleFetchRelatedVideos(video.id.videoId);
+    this.fetchRelatedVideos(video.id.videoId);
   }
 
   handleFetchComments(videoId) {
@@ -70,8 +79,8 @@ class App extends React.Component {
     .catch(err => console.log(err));
   }
 
-  handleFetchRelatedVideos(videoId) {
-    fetch('/relatedvideos', {
+  fetchRelatedVideos(videoId) {
+    fetch('/related/videos', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({data: videoId}),
@@ -85,7 +94,7 @@ class App extends React.Component {
     .catch(err => console.log(err));
   }
 
-  handleFetchTrending() {
+  fetchTrending() {
     fetch('/trending', {
       method: 'GET',
     })
@@ -99,17 +108,44 @@ class App extends React.Component {
     .catch(err => console.log(err));
   }
 
+  fetchPopularMusicVideos() {
+    fetch('/popular/musicvideos', {method: 'GET'})
+      .then(res => res.json())
+      .then(data => {
+        this.setState({
+          popularMusicVideos: data.items
+        })
+      })
+      .catch(err => console.log(err));
+  }
+
 
   render() {
     return (
       <div className='App'>
 
         <TopMenu
-          handleVideoListUpdate={this.handleVideoListUpdate} />
+          handleVideoListUpdate={this.handleVideoListUpdate}
+        />
 
         <TopMenuMobile />
 
-        {!this.state.selectedVideo &&
+        {this.state.trendingVideos && this.state.popularMusicVideos && !this.state.videos &&
+          <div>
+            <LandingVideoList
+              videos={this.state.trendingVideos}
+              title='Trending'
+            />
+            <LandingVideoList
+              videos={this.state.popularMusicVideos}
+              title='Popular Music Videos by Music'
+            />
+
+
+          </div>
+        }
+
+        {this.state.videos && !this.state.selectedVideo &&
           <VideoList
             videos={this.state.videos}
             resultsNumber={this.state.resultsNumber}

@@ -23,7 +23,7 @@ routes.post('/comments', function(req, res) {
     })
 })
 
-routes.post('/relatedvideos', function(req, res) {
+routes.post('/related/videos', function(req, res) {
   request.get('https://www.googleapis.com/youtube/v3/search?' +
     'part=snippet&type=video&maxResults=20' +
     '&relatedToVideoId=' + req.body.data +
@@ -35,7 +35,23 @@ routes.post('/relatedvideos', function(req, res) {
 
 routes.get('/trending', function(req, res) {
   request.get('https://www.googleapis.com/youtube/v3/videos?' +
-    'part=snippet&chart=mostPopular&maxResults=10' +
+    'part=snippet&chart=mostPopular&maxResults=20' +
+    '&key=' + process.env.YOUTUBE_API_KEY,
+    function(e, r, data) {
+      res.send(data)
+    })
+})
+
+routes.get('/recommended', function(req, res) {
+
+})
+
+//Channel 'Music'
+//Playlist 'Popular Music Videos'
+routes.get('/popular/musicvideos', function(req, res) {
+  request.get('https://www.googleapis.com/youtube/v3/playlistItems?' +
+    'part=snippet,contentDetails&maxResults=20' +
+    '&playlistId=PLFgquLnL59alCl_2TQvOiD5Vgm1hCaGSI' +
     '&key=' + process.env.YOUTUBE_API_KEY,
     function(e, r, data) {
       res.send(data)

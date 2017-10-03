@@ -7,49 +7,46 @@ class VideoList extends React.Component {
   }
 
   render() {
-    return (
-      <div className='VideoList'>
-        <div className='VideoList-top'>
-          <span>About {this.props.resultsNumber} results</span>
-        </div>
-        {
-          this.props.videos ?
-            this.props.videos.map((video, idx) =>  (
-
-              <div className='VideoList-video' key={idx} onClick={() => this.props.handleSelectVideo(video)}>
-                <div>
-                  <div
-                    className='VideoList-videoImage'
-                    style={{background: `url(${video.snippet.thumbnails.high.url})`}}>
-                  </div>
-                </div>
-                <div className='VideoList-videoDescription'>
-
-                  <div className='VideoList-videoDescriptionTitle'>
-                    <span>{video.snippet.title}</span>
-                  </div>
-
-                  <div className='VideoList-videoDescriptionChannelTitle'>
-                    <span>{video.snippet.channelTitle}</span>
-                    <span>•</span>
-                    <span>{video.snippet.publishedAt}</span>
-                  </div>
-
-                  <span className='VideoList-videoDescriptionDescription'>
-                    {video.snippet.description}
-                  </span>
-
+    if(this.props.videos) {
+      return (
+        <div className='VideoList'>
+          <div className='VideoList-top'>
+            <span>About {this.props.resultsNumber} results</span>
+          </div>
+          {this.props.videos.map((video, idx) =>  (
+            <div className='VideoList-video' key={idx} onClick={() => this.props.handleSelectVideo(video)}>
+              <div>
+                <div
+                  className='VideoList-videoImage'
+                  style={{background: `url(${video.snippet.thumbnails.high.url})`}}>
                 </div>
               </div>
+              <div className='VideoList-videoDescription'>
 
-            ))
-            :
-            <span>search for videos!</span>
+                <div className='VideoList-videoDescriptionTitle'>
+                  <span>{video.snippet.title}</span>
+                </div>
 
+                <div className='VideoList-videoDescriptionChannelTitle'>
+                  <span>{video.snippet.channelTitle}</span>
+                  <span>•</span>
+                  <span>{video.snippet.publishedAt}</span>
+                </div>
 
-        }
-      </div>
-    )
+                <span className='VideoList-videoDescriptionDescription'>
+                  {video.snippet.description}
+                </span>
+
+              </div>
+            </div>
+          ))}
+        </div>
+      )
+    } else {
+      return (
+        <div></div>
+      )
+    }
   }
 
 }

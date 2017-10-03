@@ -256,6 +256,26 @@ body {
   margin-bottom: 8px;
 }
 
+.landingVideoList {
+  margin-top: 56px;
+  height: 200px;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.landingVideoList-container {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  width: 100%;
+}
+
+.landingVideoList-video {
+  margin-right: 10px;
+  font-size: 12px;
+}
+
 @media (max-width: 725px) {
   .TopMenuMobile {
     display: block;
