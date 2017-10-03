@@ -2,7 +2,7 @@ import React from 'react';
 
 import TopMenu from './TopMenu';
 import TopMenuMobile from './TopMenuMobile';
-import VideoGrid from './VideoGrid';
+import VideoList from './VideoList';
 
 
 class App extends React.Component {
@@ -11,14 +11,26 @@ class App extends React.Component {
     super(props);
     this.state = {
       videos: null,
+      resultsNumber: 0,
     }
     this.handVideoListUpdate = this.handVideoListUpdate.bind(this);
+    this.numberWithCommas = this.numberWithCommas.bind(this);
   }
 
-  handVideoListUpdate(videos) {
+  handVideoListUpdate(data) {
+    console.log('state', data)
     this.setState({
-      videos: videos,
+      videos: data.items,
+      resultsNumber: this.numberWithCommas(data.pageInfo.totalResults),
     })
+  }
+
+  numberWithCommas(x) {
+    x = x.toString();
+    var pattern = /(-?\d+)(\d{3})/;
+    while (pattern.test(x))
+        x = x.replace(pattern, "$1,$2");
+    return x;
   }
 
   render() {
@@ -29,7 +41,10 @@ class App extends React.Component {
 
         <TopMenuMobile />
 
-        <VideoGrid videos={this.state.videos} />
+        <VideoList
+          videos={this.state.videos}
+          resultsNumber={this.state.resultsNumber}
+        />
 
       </div>
     )
