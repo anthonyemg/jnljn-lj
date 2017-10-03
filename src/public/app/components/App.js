@@ -16,12 +16,18 @@ class App extends React.Component {
       selectedVideo: null,
       selectedVideoComments: null,
       selectedVideoRelatedVideos: null,
+      trendingVideos: null,
     }
     this.handleVideoListUpdate = this.handleVideoListUpdate.bind(this);
     this.numberWithCommas = this.numberWithCommas.bind(this);
     this.handleSelectVideo = this.handleSelectVideo.bind(this);
     this.handleFetchComments = this.handleFetchComments.bind(this);
     this.handleFetchRelatedVideos = this.handleFetchRelatedVideos.bind(this);
+    this.handleFetchTrending = this.handleFetchTrending.bind(this);
+  }
+
+  componentWillMount() {
+    this.handleFetchTrending();
   }
 
   handleVideoListUpdate(data) {
@@ -72,13 +78,27 @@ class App extends React.Component {
     })
     .then(res => res.json())
     .then(data => {
-      console.log('wow dude', data.items)
       this.setState({
         selectedVideoRelatedVideos: data.items,
       })
     })
     .catch(err => console.log(err));
   }
+
+  handleFetchTrending() {
+    fetch('/trending', {
+      method: 'GET',
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log('trending', data.items)
+      this.setState({
+        trendingVideos: data.items,
+      })
+    })
+    .catch(err => console.log(err));
+  }
+
 
   render() {
     return (

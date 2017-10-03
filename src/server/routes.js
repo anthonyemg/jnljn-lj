@@ -33,4 +33,13 @@ routes.post('/relatedvideos', function(req, res) {
     })
 })
 
+routes.get('/trending', function(req, res) {
+  request.get('https://www.googleapis.com/youtube/v3/videos?' +
+    'part=snippet&chart=mostPopular&maxResults=10' +
+    '&key=' + process.env.YOUTUBE_API_KEY,
+    function(e, r, data) {
+      res.send(data)
+    })
+})
+
 module.exports = routes;
