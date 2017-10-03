@@ -6,25 +6,18 @@ class TopMenu extends React.Component {
     super(props);
     this.searchYouTube = this.searchYouTube.bind(this);
   }
-
   searchYouTube () {
-
-    fetch('https://www.googleapis.com/youtube/v3/search?key=' + '' + '&part=snippet,id&order=date&maxResults=20')
-       .then(resp => resp.json())
-       .then((resp) => {
-         console.log('wooo', resp.items);
-         //this.setState({video: resp.results});
-        //  this.setState({video: resp.items});xx
-        //  console.log(this.state.video);
-         this.props.handVideoListUpdate(resp.items);
-       })
-
-        // .then(res => res.json())
-        // .then(function(data) {
-        //   console.log('woo',data)
-        // })
-        .catch(err => console.log('errrorr',err));
-  };
+    fetch('/videos', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({data: 'greenheck'}),         //change this state
+    })
+    .then(res => res.json())
+    .then(data => {
+      this.props.handVideoListUpdate(data.items);
+    })
+    .catch(err => console.log(err));
+  }
 
   render() {
     return (
