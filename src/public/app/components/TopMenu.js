@@ -21,7 +21,7 @@ class TopMenu extends React.Component {
     .then(res => res.json())
     .then(data => {
       console.log(data)
-      this.props.handVideoListUpdate(data);
+      this.props.handleVideoListUpdate(data);
     })
     .catch(err => console.log(err));
   }

@@ -16,7 +16,7 @@ class VideoList extends React.Component {
           this.props.videos ?
             this.props.videos.map((video, idx) =>  (
 
-              <div className='VideoList-video' key={idx}>
+              <div className='VideoList-video' key={idx} onClick={() => this.props.handleSelectVideo(video)}>
                 <div>
                   <div
                     className='VideoList-videoImage'

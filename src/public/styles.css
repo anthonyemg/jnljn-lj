@@ -5,6 +5,7 @@
 body {
   background-color: rgb(250,250,250);
   margin: 0px;
+  font-family: Roboto;
 }
 
 .App {
@@ -214,6 +215,27 @@ body {
   font-size: 13px;
   color: rgb(147,147,147);
   font-weight: 400;
+}
+
+.video-player {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding-top: 56px;
+  flex-direction: column;
+  padding-left: 42px;
+  background-color: rgb(255,255,255);
+  height: 100%;
+}
+
+.video-playerVideo {
+  margin-top: 24px;
+}
+
+.video-player iframe {
+  width: 640px;
+  height: 360px;
+  border: none;
 }
 
 @media (max-width: 725px) {

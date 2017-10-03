@@ -3,7 +3,7 @@ import React from 'react';
 import TopMenu from './TopMenu';
 import TopMenuMobile from './TopMenuMobile';
 import VideoList from './VideoList';
-
+import VideoPlayer from './VideoPlayer';
 
 class App extends React.Component {
 
@@ -12,16 +12,20 @@ class App extends React.Component {
     this.state = {
       videos: null,
       resultsNumber: 0,
+      videoMode: false,
+      selectedVideo: null,
     }
-    this.handVideoListUpdate = this.handVideoListUpdate.bind(this);
+    this.handleVideoListUpdate = this.handleVideoListUpdate.bind(this);
     this.numberWithCommas = this.numberWithCommas.bind(this);
+    this.handleSelectVideo = this.handleSelectVideo.bind(this);
   }
 
-  handVideoListUpdate(data) {
+  handleVideoListUpdate(data) {
     console.log('state', data)
     this.setState({
       videos: data.items,
       resultsNumber: this.numberWithCommas(data.pageInfo.totalResults),
+      selectedVideo: null,
     })
   }
 
@@ -33,18 +37,39 @@ class App extends React.Component {
     return x;
   }
 
+  handleSelectVideo(video) {
+    this.setState({
+      selectedVideo: video,
+    })
+  }
+
   render() {
     return (
       <div className='App'>
 
-        <TopMenu handVideoListUpdate={this.handVideoListUpdate} />
+        <TopMenu
+          handleVideoListUpdate={this.handleVideoListUpdate} />
 
         <TopMenuMobile />
 
-        <VideoList
-          videos={this.state.videos}
-          resultsNumber={this.state.resultsNumber}
-        />
+        {this.state.selectedVideo ?
+          <div></div>
+          :
+          <VideoList
+            videos={this.state.videos}
+            resultsNumber={this.state.resultsNumber}
+            handleSelectVideo={this.handleSelectVideo}
+          />
+        }
+
+        {this.state.selectedVideo ?
+          <VideoPlayer
+            selectedVideo={this.state.selectedVideo}
+            handleSelectVideo={this.handleSelectVideo}
+          />
+          :
+          <div></div>
+        }
 
       </div>
     )
