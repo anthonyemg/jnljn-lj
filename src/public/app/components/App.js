@@ -14,18 +14,20 @@ class App extends React.Component {
       resultsNumber: 0,
       videoMode: false,
       selectedVideo: null,
+      selectedVideoComments: null,
     }
     this.handleVideoListUpdate = this.handleVideoListUpdate.bind(this);
     this.numberWithCommas = this.numberWithCommas.bind(this);
     this.handleSelectVideo = this.handleSelectVideo.bind(this);
+    this.handleFetchComments = this.handleFetchComments.bind(this);
   }
 
   handleVideoListUpdate(data) {
-    console.log('state', data)
     this.setState({
       videos: data.items,
       resultsNumber: this.numberWithCommas(data.pageInfo.totalResults),
       selectedVideo: null,
+      selectedVideoComments: null,
     })
   }
 
@@ -41,6 +43,22 @@ class App extends React.Component {
     this.setState({
       selectedVideo: video,
     })
+    this.handleFetchComments(video.id.videoId);
+  }
+
+  handleFetchComments(videoId) {
+    fetch('/comments', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({data: videoId}),
+    })
+    .then(res => res.json())
+    .then(data => {
+      this.setState({
+        selectedVideoComments: data.items,
+      })
+    })
+    .catch(err => console.log(err));
   }
 
   render() {
@@ -52,9 +70,7 @@ class App extends React.Component {
 
         <TopMenuMobile />
 
-        {this.state.selectedVideo ?
-          <div></div>
-          :
+        {!this.state.selectedVideo &&
           <VideoList
             videos={this.state.videos}
             resultsNumber={this.state.resultsNumber}
@@ -62,13 +78,12 @@ class App extends React.Component {
           />
         }
 
-        {this.state.selectedVideo ?
+        {this.state.selectedVideo &&
           <VideoPlayer
             selectedVideo={this.state.selectedVideo}
             handleSelectVideo={this.handleSelectVideo}
+            selectedVideoComments={this.state.selectedVideoComments}
           />
-          :
-          <div></div>
         }
 
       </div>

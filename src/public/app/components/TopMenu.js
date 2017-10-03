@@ -5,7 +5,7 @@ class TopMenu extends React.Component {
   constructor(props) {
     super(props);
     this.state =  {
-      searchQuery: '240sx',
+      searchQuery: 'cake',
     }
     this.searchYouTube = this.searchYouTube.bind(this);
     this.handleSearchChange = this.handleSearchChange.bind(this);
@@ -20,7 +20,6 @@ class TopMenu extends React.Component {
     })
     .then(res => res.json())
     .then(data => {
-      console.log(data)
       this.props.handleVideoListUpdate(data);
     })
     .catch(err => console.log(err));

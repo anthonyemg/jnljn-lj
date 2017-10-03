@@ -1,4 +1,5 @@
 import React from 'react';
+import Comments from './Comments';
 
 class VideoPlayer extends React.Component {
 
@@ -9,6 +10,7 @@ class VideoPlayer extends React.Component {
   render() {
     return (
       <div className='video-player'>
+
         <div className='video-playerVideo'>
           <iframe
             className="embed-responsive-item"
@@ -19,6 +21,13 @@ class VideoPlayer extends React.Component {
         <div className="video-playerDetails">
           <h3>{this.props.selectedVideo.snippet.title}</h3>
         </div>
+
+        {this.props.selectedVideoComments &&
+          <Comments
+            selectedVideoComments={this.props.selectedVideoComments}
+          />
+        }
+
       </div>
     )
   }
