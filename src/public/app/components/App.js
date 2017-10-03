@@ -20,6 +20,7 @@ class App extends React.Component {
     this.numberWithCommas = this.numberWithCommas.bind(this);
     this.handleSelectVideo = this.handleSelectVideo.bind(this);
     this.handleFetchComments = this.handleFetchComments.bind(this);
+    this.handleFetchRelatedVideos = this.handleFetchRelatedVideos.bind(this);
   }
 
   handleVideoListUpdate(data) {
@@ -43,7 +44,8 @@ class App extends React.Component {
     this.setState({
       selectedVideo: video,
     })
-    this.handleFetchComments(video.id.videoId);
+    this.handleFetchComments(video.id.videoId)
+    this.handleFetchRelatedVideos(video.id.videoId);
   }
 
   handleFetchComments(videoId) {
@@ -57,6 +59,22 @@ class App extends React.Component {
       this.setState({
         selectedVideoComments: data.items,
       })
+    })
+    .catch(err => console.log(err));
+  }
+
+  handleFetchRelatedVideos(videoId) {
+    fetch('/relatedvideos', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({data: videoId}),
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log('wow dude', data)
+      // this.setState({
+      //   selectedVideoComments: data.items,
+      // })
     })
     .catch(err => console.log(err));
   }
