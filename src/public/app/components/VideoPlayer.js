@@ -39,11 +39,12 @@ class VideoPlayer extends React.Component {
 
           </div>
 
-
-          <UpNextList
-            selectedVideoRelatedVideos = {this.props.selectedVideoRelatedVideos}
-            type = 'mobile'
-          />
+          {this.props.selectedVideoRelatedVideos &&
+            <UpNextList
+              selectedVideoRelatedVideos = {this.props.selectedVideoRelatedVideos}
+              type = 'mobile'
+            />
+          }
 
 
           {this.props.selectedVideoComments &&
