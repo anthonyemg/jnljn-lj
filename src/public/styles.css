@@ -312,6 +312,59 @@ body {
   color: rgb(110,110,110);
 }
 
+.comments-container {
+
+}
+
+.comments-title {
+  font-size: 16px;
+}
+
+.comments-commentWrapper {
+  margin-top: 26px;
+  font-size: 13px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: space-between;
+  flex-direction: row;
+}
+
+.comments-comment {
+  display: flex;
+  flex-direction: column;
+}
+
+.comments-userImage {
+  width: 48px;
+  height: 100px;
+  margin-right: 18px;
+}
+
+.comments-userImage img {
+  border-radius: 24px;
+  width: 48px;
+  height: 48px;
+}
+
+.comments-commentName {
+  font-weight: 500;
+  margin-bottom: 10px;
+  margin-bottom: 8px;
+}
+
+.comments-commentText {
+  font-weight: 400;
+}
+
+.comments-commentReply {
+  color: rgb(160,160,160);
+  font-weight: 300;
+  margin-top: 15px;
+  width: 140px;
+  display: flex;
+  justify-content: space-between;
+}
+
 @media (max-width: 725px) {
   .TopMenuMobile {
     display: block;

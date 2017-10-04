@@ -66,7 +66,7 @@ class App extends React.Component {
   }
 
   handleSelectVideo(video) {
-    // console.log('handingselectvideo', video)
+    console.log('handingselectvideo', video)
     var id;
     if (video.kind === 'youtube#playlistItem') {
       id = video.snippet.resourceId.videoId;
