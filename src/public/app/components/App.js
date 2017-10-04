@@ -66,7 +66,6 @@ class App extends React.Component {
   }
 
   handleSelectVideo(video) {
-    console.log('handingselectvideo', video)
     var id;
     if (video.kind === 'youtube#playlistItem') {
       id = video.snippet.resourceId.videoId;
@@ -177,7 +176,6 @@ class App extends React.Component {
       let diff = currentDate.getMonth() - videoDate.getMonth();
       return diff > 1 ? diff + ' months ago' : '1 month ago';
     } else  if (currentDate.getDate() - videoDate.getDate() > 6) {
-      console.log('huh', (currentDate.getDate() - videoDate.getDate()) / 7 )
       let diff = Math.floor((currentDate.getDate() - videoDate.getDate()) / 7);
       return diff > 1 ? diff + ' weeks ago' : '1 week ago';
     } else if (currentDate.getDate() - videoDate.getDate() > 0) {

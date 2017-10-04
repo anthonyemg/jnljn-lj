@@ -5,6 +5,12 @@ class VideoPlayer extends React.Component {
 
   constructor(props) {
     super(props);
+    this.convertToDate = this.convertToDate.bind(this);
+  }
+
+  convertToDate(date) {
+    let d = new Date(date);
+    return d.getDate() + "-" + (d.getMonth() + 1) + "-" + d.getFullYear()
   }
 
   render() {
@@ -19,8 +25,17 @@ class VideoPlayer extends React.Component {
               allowFullScreen>
             </iframe>
           </div>
-          <div className="video-playerDetails">
-            <h3>{this.props.selectedVideo.snippet.title}</h3>
+          <div className='video-playerDetails'>
+
+            <div className='video-playerDetailsTitle'>
+              <span>{this.props.selectedVideo.snippet.title}</span>
+            </div>
+            <div className='video-playerDetailsText'>
+              <span className='video-playerChannelTitle'>{this.props.selectedVideo.snippet.channelTitle}</span>
+              <span className='video-playerPublishedAt'>Published on {this.convertToDate(this.props.selectedVideo.snippet.publishedAt)}</span>
+              <span className='video-playerDescription'>{this.props.selectedVideo.snippet.description}</span>
+            </div>
+
           </div>
 
           {this.props.selectedVideoComments &&

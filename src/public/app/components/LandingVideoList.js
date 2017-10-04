@@ -7,7 +7,6 @@ class LandingVideoList extends React.Component {
   }
 
   render() {
-    console.log(this.props.videos[0])
     return(
       <div className='landingVideoList'>
         <span className='landingVideoList-title'>

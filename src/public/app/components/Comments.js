@@ -11,8 +11,6 @@ class Comments extends React.Component {
   //.snippet.publishedAt    = postime
 
   render() {
-    console.log('commmmment', this.props.selectedVideoComments)
-    // console.log('count', this.props.selectedVideoComments[0].snippet.topLevelComment.snippet.likeCount)
     return (
       <div className='comments-container'>
         <div className='comments-title'>Comments</div>
