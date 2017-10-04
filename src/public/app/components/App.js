@@ -200,6 +200,8 @@ class App extends React.Component {
         />
 
         <TopMenuMobile
+          handleVideoListUpdate={this.handleVideoListUpdate}
+          handleYuoTubePress={this.handleYuoTubePress}
           selectedVideo={this.state.selectedVideo}
         />
 
