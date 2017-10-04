@@ -33,15 +33,17 @@ class VideoPlayer extends React.Component {
         {this.props.selectedVideoRelatedVideos &&
           <div className='video-playerUpNext'>
             <span>Up next</span>
-            {this.props.selectedVideoRelatedVideos.map((video, idx) => (
-              <div className='video-playerUpNextVideo' key={idx} onClick={() => this.props.handleSelectVideo(video)}>
-                <img src={video.snippet.thumbnails.default.url} />
-                <div>
-                  <span>{video.snippet.title}</span>
-                  <span>{video.snippet.channelTitle}</span>
+            <div className='video-playerUpNextList'>
+              {this.props.selectedVideoRelatedVideos.map((video, idx) => (
+                <div className='video-playerUpNextVideoContainer' key={idx} onClick={() => this.props.handleSelectVideo(video)}>
+                  <img src={video.snippet.thumbnails.medium.url} />
+                  <div className='video-playerUpNextVideoWrapper'>
+                    <span className='video-playerUpNextVideoTitle'>{video.snippet.title}</span>
+                    <span className='video-playerUpNextVideoText'>{video.snippet.channelTitle}</span>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         }
 
