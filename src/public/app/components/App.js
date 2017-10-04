@@ -5,6 +5,7 @@ import TopMenuMobile from './TopMenuMobile';
 import VideoList from './VideoList';
 import VideoPlayer from './VideoPlayer';
 import LandingVideoList from './LandingVideoList';
+import MobileLanding from './MobileLanding';
 
 class App extends React.Component {
 
@@ -198,10 +199,12 @@ class App extends React.Component {
           handleYuoTubePress={this.handleYuoTubePress}
         />
 
-        <TopMenuMobile />
+        <TopMenuMobile
+          selectedVideo={this.state.selectedVideo}
+        />
 
         {this.state.trendingVideos && this.state.popularMusicVideos && this.state.movieTrailers && this.state.lateNight && !this.state.videos && !this.state.selectedVideo &&
-          <div className='landingVideoList-wrapper'>
+          <div className='landingVideoList-wrapper desktop'>
             <LandingVideoList
               videos={this.state.trendingVideos}
               title='Trending'
@@ -227,6 +230,15 @@ class App extends React.Component {
               convertDate={this.convertDate}
             />
           </div>
+        }
+
+        {this.state.trendingVideos && !this.state.selectedVideo && !this.state.videos &&
+          <MobileLanding
+            videos={this.state.trendingVideos}
+            // title='Trending'
+            handleSelectVideo={this.handleSelectVideo}
+            convertDate={this.convertDate}
+          />
         }
 
         {this.state.videos && !this.state.selectedVideo &&

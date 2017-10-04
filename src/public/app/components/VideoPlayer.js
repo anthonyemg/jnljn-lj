@@ -1,5 +1,6 @@
 import React from 'react';
 import Comments from './Comments';
+import UpNextList from './UpNextList'
 
 class VideoPlayer extends React.Component {
 
@@ -10,7 +11,7 @@ class VideoPlayer extends React.Component {
 
   convertToDate(date) {
     let d = new Date(date);
-    return d.getDate() + "-" + (d.getMonth() + 1) + "-" + d.getFullYear()
+    return (d.getMonth() + 1) + "-" + d.getDate() + "-" + d.getFullYear();
   }
 
   render() {
@@ -38,6 +39,13 @@ class VideoPlayer extends React.Component {
 
           </div>
 
+
+          <UpNextList
+            selectedVideoRelatedVideos = {this.props.selectedVideoRelatedVideos}
+            type = 'mobile'
+          />
+
+
           {this.props.selectedVideoComments &&
             <Comments
               selectedVideoComments={this.props.selectedVideoComments}
@@ -46,20 +54,10 @@ class VideoPlayer extends React.Component {
         </div>
 
         {this.props.selectedVideoRelatedVideos &&
-          <div className='video-playerUpNext'>
-            <span>Up next</span>
-            <div className='video-playerUpNextList'>
-              {this.props.selectedVideoRelatedVideos.map((video, idx) => (
-                <div className='video-playerUpNextVideoContainer' key={idx} onClick={() => this.props.handleSelectVideo(video)}>
-                  <img src={video.snippet.thumbnails.medium.url} />
-                  <div className='video-playerUpNextVideoWrapper'>
-                    <span className='video-playerUpNextVideoTitle'>{video.snippet.title}</span>
-                    <span className='video-playerUpNextVideoText'>{video.snippet.channelTitle}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+          <UpNextList
+            selectedVideoRelatedVideos = {this.props.selectedVideoRelatedVideos}
+            type = 'desktop'
+          />
         }
 
       </div>

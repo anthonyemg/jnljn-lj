@@ -11,7 +11,7 @@ class TopMenuMobile extends React.Component {
   render() {
     return (
       <div className='TopMenuMobile'>
-        <div className='TopMenuMobile-top'>
+        <div className='TopMenuMobile-top' style={{backgroundColor: this.props.selectedVideo ? 'rgb(51,51,51)' : 'rgb(253,0,0)'}}>
           <div>
             <i className='fa fa-youtube-play fa-2x' style={{marginLeft:12}} />
             <span style={{marginLeft:12}}>Home</span>
