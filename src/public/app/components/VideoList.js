@@ -16,10 +16,11 @@ class VideoList extends React.Component {
           {this.props.videos.map((video, idx) =>  (
             <div className='VideoList-video' key={idx} onClick={() => this.props.handleSelectVideo(video)}>
               <div>
-                <div
+                {/* <div
                   className='VideoList-videoImage'
-                  style={{background: `url(${video.snippet.thumbnails.high.url})`}}>
-                </div>
+                  style={{background: `url(${video.snippet.thumbnails.default.url})`}}>
+                </div> */}
+                <img src={video.snippet.thumbnails.medium.url} />
               </div>
               <div className='VideoList-videoDescription'>
 

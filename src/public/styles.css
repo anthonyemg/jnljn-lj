@@ -181,6 +181,12 @@ body {
   display: flex;
 }
 
+.VideoList-video img {
+  height: 138px;
+  min-width: 248px;
+  margin-right: 16px;
+}
+
 .VideoList-videoImage {
   width: 246px;
   height: 138px;
