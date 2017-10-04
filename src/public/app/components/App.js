@@ -208,6 +208,7 @@ class App extends React.Component {
             handleSelectVideo={this.handleSelectVideo}
             selectedVideoComments={this.state.selectedVideoComments}
             selectedVideoRelatedVideos={this.state.selectedVideoRelatedVideos}
+            handleSelectVideo={this.handleSelectVideo}
           />
         }
 

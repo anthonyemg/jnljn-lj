@@ -34,7 +34,7 @@ class VideoPlayer extends React.Component {
           <div className='video-playerUpNext'>
             <span>Up next</span>
             {this.props.selectedVideoRelatedVideos.map((video, idx) => (
-              <div className='video-playerUpNextVideo' key={idx}>
+              <div className='video-playerUpNextVideo' key={idx} onClick={() => this.props.handleSelectVideo(video)}>
                 <img src={video.snippet.thumbnails.default.url} />
                 <div>
                   <span>{video.snippet.title}</span>
