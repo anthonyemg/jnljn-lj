@@ -33,6 +33,7 @@ routes.post('/related/videos', function(req, res) {
     })
 })
 
+//Trending
 routes.get('/trending', function(req, res) {
   request.get('https://www.googleapis.com/youtube/v3/videos?' +
     'part=snippet&chart=mostPopular&maxResults=20' +
@@ -40,10 +41,6 @@ routes.get('/trending', function(req, res) {
     function(e, r, data) {
       res.send(data)
     })
-})
-
-routes.get('/recommended', function(req, res) {
-
 })
 
 //Channel 'Music'
@@ -58,17 +55,27 @@ routes.get('/popular/musicvideos', function(req, res) {
     })
 })
 
-//Channel 'Movies - Topic'
-//Playlist 'Trailers'
 routes.get('/movie/trailers', function(req, res) {
   request.get('https://www.googleapis.com/youtube/v3/playlistItems?' +
-    'part=snippet,contentDetails&maxResults=20' +
+    '&key=' + process.env.YOUTUBE_API_KEY +
     '&playlistId=PLzjFbaFzsmMT_VuMSVQxfkQIw7VNbHyVi' +
-    '&key=' + process.env.YOUTUBE_API_KEY,
+    '&type=video&chart=relavence&part=snippet,id&maxResults=20',
     function(e, r, data) {
       res.send(data)
     })
 })
+
+//Channel 'Movies - Topic'
+//Playlist 'Trailers'
+// routes.get('/movie/trailers', function(req, res) {
+//   request.get('https://www.googleapis.com/youtube/v3/playlistItems?' +
+//     'part=snippet,contentDetails&maxResults=20' +
+//     '&playlistId=PLzjFbaFzsmMT_VuMSVQxfkQIw7VNbHyVi' +
+//     '&key=' + process.env.YOUTUBE_API_KEY,
+//     function(e, r, data) {
+//       res.send(data)
+//     })
+// })
 
 //Channel 'Popular on YouTube'
 //Playlist 'Catch Up on Late Night'

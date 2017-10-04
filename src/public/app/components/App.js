@@ -14,6 +14,7 @@ class App extends React.Component {
       videos: null,
       resultsNumber: 0,
       selectedVideo: null,
+      selectedVideoId: null,
       selectedVideoComments: null,
       selectedVideoRelatedVideos: null,
       trendingVideos: null,
@@ -63,11 +64,21 @@ class App extends React.Component {
   }
 
   handleSelectVideo(video) {
+    // console.log('handingselectvideo', video)
+    var id;
+    if (video.kind === 'youtube#playlistItem') {
+      id = video.snippet.resourceId.videoId;
+    } else if (video.kind === 'youtube#video') {
+      id = video.id;
+    } else if (video.kind === 'youtube#searchResult') {
+      id = video.id.videoId;
+    }
     this.setState({
       selectedVideo: video,
+      selectedVideoId: id,
     })
-    this.handleFetchComments(video.id.videoId)
-    this.fetchRelatedVideos(video.id.videoId);
+    this.handleFetchComments(id);
+    this.fetchRelatedVideos(id);
   }
 
   handleFetchComments(videoId) {
@@ -157,23 +168,27 @@ class App extends React.Component {
 
         <TopMenuMobile />
 
-        {this.state.trendingVideos && this.state.popularMusicVideos && this.state.movieTrailers && this.state.lateNight && !this.state.videos &&
+        {this.state.trendingVideos && this.state.popularMusicVideos && this.state.movieTrailers && this.state.lateNight && !this.state.videos && !this.state.selectedVideo &&
           <div>
             <LandingVideoList
               videos={this.state.trendingVideos}
               title='Trending'
+              handleSelectVideo={this.handleSelectVideo}
             />
             <LandingVideoList
               videos={this.state.popularMusicVideos}
               title='Popular Music Videos by Music'
+              handleSelectVideo={this.handleSelectVideo}
             />
             <LandingVideoList
               videos={this.state.movieTrailers}
               title='Trailers by Movies - Topic'
+              handleSelectVideo={this.handleSelectVideo}
             />
             <LandingVideoList
               videos={this.state.lateNight}
               title='Catch Up on Late Night by Popular on YouTube'
+              handleSelectVideo={this.handleSelectVideo}
             />
           </div>
         }
@@ -189,6 +204,7 @@ class App extends React.Component {
         {this.state.selectedVideo &&
           <VideoPlayer
             selectedVideo={this.state.selectedVideo}
+            selectedVideoId={this.state.selectedVideoId}
             handleSelectVideo={this.handleSelectVideo}
             selectedVideoComments={this.state.selectedVideoComments}
             selectedVideoRelatedVideos={this.state.selectedVideoRelatedVideos}

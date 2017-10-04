@@ -14,7 +14,7 @@ class LandingVideoList extends React.Component {
         </span>
         <div className='landingVideoList-container'>
           {this.props.videos.map((video, idx) => (
-            <div className='landingVideoList-video' key={idx}>
+            <div className='landingVideoList-video' key={idx} onClick={() => this.props.handleSelectVideo(video)}>
               <img src={video.snippet.thumbnails.default.url} />
               <span>{video.snippet.title}</span>
             </div>
