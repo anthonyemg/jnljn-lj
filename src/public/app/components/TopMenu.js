@@ -5,7 +5,7 @@ class TopMenu extends React.Component {
   constructor(props) {
     super(props);
     this.state =  {
-      searchQuery: 'cake',
+      searchQuery: '',
     }
     this.searchYouTube = this.searchYouTube.bind(this);
     this.handleSearchChange = this.handleSearchChange.bind(this);
@@ -46,7 +46,7 @@ class TopMenu extends React.Component {
             <i className='fa fa-bars fa-lg' />
           </div>
           <i className='fa fa-youtube-play fa-med topMenu-youtubeLogo' />
-          <span>YuoTube</span>
+          <span onClick={() => this.props.handleYuoTubePress()}>YuoTube</span>
         </div>
 
         <div className='topMenu-searchBar'>

@@ -256,12 +256,20 @@ body {
   margin-bottom: 8px;
 }
 
-.landingVideoList {
+.landingVideoList-wrapper {
   margin-top: 56px;
-  height: 200px;
-  width: 100%;
-  padding: 20px;
+}
+
+.landingVideoList {
+  padding-top: 24px;
+  padding-left: 24px;
+  padding-right: 24px;
   box-sizing: border-box;
+}
+
+.landingVideoList-title {
+  font-size: 17px;
+  font-weight: 500;
 }
 
 .landingVideoList-container {
@@ -269,11 +277,39 @@ body {
   flex-direction: row;
   overflow-x: auto;
   width: 100%;
+  margin-top: 24px;
+  border-bottom: solid 1px rgb(238,238,238);
 }
 
 .landingVideoList-video {
-  margin-right: 10px;
+  margin-right: 4px;
   font-size: 12px;
+}
+
+.landingVideoList-video img {
+  width: 212px;
+}
+
+.landingVideoList-description {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+}
+
+.landingVideoList-descriptionTitle {
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  max-height: 32px;
+  overflow: hidden;
+}
+
+.landingVideoList-descriptionSubTitle {
+  font-size: 12px;
+  font-weight: 400;
+  margin-bottom: 4px;
+  color: rgb(110,110,110);
 }
 
 @media (max-width: 725px) {

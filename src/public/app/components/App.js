@@ -31,6 +31,7 @@ class App extends React.Component {
     this.fetchPopularMusicVideos = this.fetchPopularMusicVideos.bind(this);
     this.fetchMovieTrailers = this.fetchMovieTrailers.bind(this);
     this.fetchLateNight = this.fetchLateNight.bind(this);
+    this.handleYuoTubePress = this.handleYuoTubePress.bind(this);
   }
 
   componentWillMount() {
@@ -157,6 +158,14 @@ class App extends React.Component {
       .catch(err => console.log(err));
   }
 
+  handleYuoTubePress() {
+    this.setState({
+      selectedVideo: null,
+      selectedVideoId: null,
+      videos: null,
+    })
+  }
+
 
   render() {
     return (
@@ -164,12 +173,13 @@ class App extends React.Component {
 
         <TopMenu
           handleVideoListUpdate={this.handleVideoListUpdate}
+          handleYuoTubePress={this.handleYuoTubePress}
         />
 
         <TopMenuMobile />
 
         {this.state.trendingVideos && this.state.popularMusicVideos && this.state.movieTrailers && this.state.lateNight && !this.state.videos && !this.state.selectedVideo &&
-          <div>
+          <div className='landingVideoList-wrapper'>
             <LandingVideoList
               videos={this.state.trendingVideos}
               title='Trending'

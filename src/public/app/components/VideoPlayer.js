@@ -15,7 +15,7 @@ class VideoPlayer extends React.Component {
           <div className='video-playerVideo'>
             <iframe
               className="embed-responsive-item"
-              src={`https://www.youtube.com/embed/${this.props.selectedVideoId}`}
+              src={`https://www.youtube.com/embed/${this.props.selectedVideoId}?autoplay=1`}
               allowFullScreen>
             </iframe>
           </div>
