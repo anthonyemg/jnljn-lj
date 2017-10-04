@@ -32,6 +32,7 @@ class App extends React.Component {
     this.fetchMovieTrailers = this.fetchMovieTrailers.bind(this);
     this.fetchLateNight = this.fetchLateNight.bind(this);
     this.handleYuoTubePress = this.handleYuoTubePress.bind(this);
+    this.convertDate = this.convertDate.bind(this);
   }
 
   componentWillMount() {
@@ -166,6 +167,29 @@ class App extends React.Component {
     })
   }
 
+  convertDate(date) {
+    let videoDate = new Date(date);
+    let currentDate = new Date();
+    if (currentDate.getFullYear() - videoDate.getFullYear() > 0)  {
+      let diff = currentDate.getFullYear() - videoDate.getFullYear();
+      return diff > 1 ? diff + ' years ago' : '1 year ago';
+    } else if (currentDate.getMonth() - videoDate.getMonth() > 0) {
+      let diff = currentDate.getMonth() - videoDate.getMonth();
+      return diff > 1 ? diff + ' months ago' : '1 month ago';
+    } else  if (currentDate.getDate() - videoDate.getDate() > 6) {
+      console.log('huh', (currentDate.getDate() - videoDate.getDate()) / 7 )
+      let diff = Math.floor((currentDate.getDate() - videoDate.getDate()) / 7);
+      return diff > 1 ? diff + ' weeks ago' : '1 week ago';
+    } else if (currentDate.getDate() - videoDate.getDate() > 0) {
+      let diff = currentDate.getDate() - videoDate.getDate();
+      return diff > 1 ? diff + ' days ago' : '1 day ago';
+    } else if (videoDate.getHours() - currentDate.getHours() > 0) {
+      let diff = videoDate.getHours() - currentDate.getHours();
+      return diff > 1 ? diff + ' hours ago' : '1 hour ago';
+    } else {
+      return '1 hour ago';
+    }
+  }
 
   render() {
     return (
@@ -184,21 +208,25 @@ class App extends React.Component {
               videos={this.state.trendingVideos}
               title='Trending'
               handleSelectVideo={this.handleSelectVideo}
+              convertDate={this.convertDate}
             />
             <LandingVideoList
               videos={this.state.popularMusicVideos}
               title='Popular Music Videos by Music'
               handleSelectVideo={this.handleSelectVideo}
+              convertDate={this.convertDate}
             />
             <LandingVideoList
               videos={this.state.movieTrailers}
               title='Trailers by Movies - Topic'
               handleSelectVideo={this.handleSelectVideo}
+              convertDate={this.convertDate}
             />
             <LandingVideoList
               videos={this.state.lateNight}
               title='Catch Up on Late Night by Popular on YouTube'
               handleSelectVideo={this.handleSelectVideo}
+              convertDate={this.convertDate}
             />
           </div>
         }

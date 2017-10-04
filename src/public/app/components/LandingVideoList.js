@@ -20,7 +20,7 @@ class LandingVideoList extends React.Component {
               <div className='landingVideoList-description'>
                 <span className='landingVideoList-descriptionTitle'>{video.snippet.title}</span>
                 <span className='landingVideoList-descriptionSubTitle'>{video.snippet.channelTitle}</span>
-                <span className='landingVideoList-descriptionSubTitle'>{video.snippet.publishedAt}</span>
+                <span className='landingVideoList-descriptionSubTitle'>{this.props.convertDate(video.snippet.publishedAt)}</span>
               </div>
             </div>
           ))}
