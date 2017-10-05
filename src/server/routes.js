@@ -4,7 +4,7 @@ const request = require('request');
 routes.post('/videos', function(req, res) {
   request.get(
     'https://www.googleapis.com/youtube/v3/search?' +
-    'key=' + YOUTUBE_API_KEY +
+    'key=' + process.env.YOUTUBE_API_KEY +
     '&q=' + req.body.data +
     '&type=video&chart=relavence&part=snippet,id&maxResults=20',
     function(e, r, data) {
@@ -15,7 +15,7 @@ routes.post('/videos', function(req, res) {
 routes.post('/comments', function(req, res) {
   request.get(
     'https://www.googleapis.com/youtube/v3/commentThreads?' +
-    'key=' + YOUTUBE_API_KEY +
+    'key=' + process.env.YOUTUBE_API_KEY +
     '&videoId=' + req.body.data +
     '&part=snippet,replies',
     function(e, r, data) {
@@ -27,7 +27,7 @@ routes.post('/related/videos', function(req, res) {
   request.get('https://www.googleapis.com/youtube/v3/search?' +
     'part=snippet&type=video&maxResults=20' +
     '&relatedToVideoId=' + req.body.data +
-    '&key=' + YOUTUBE_API_KEY,
+    '&key=' + process.env.YOUTUBE_API_KEY,
     function(e, r, data) {
       res.send(data)
     })
@@ -37,7 +37,7 @@ routes.post('/related/videos', function(req, res) {
 routes.get('/trending', function(req, res) {
   request.get('https://www.googleapis.com/youtube/v3/videos?' +
     'part=snippet&chart=mostPopular&maxResults=20' +
-    '&key=' + YOUTUBE_API_KEY,
+    '&key=' + process.env.YOUTUBE_API_KEY,
     function(e, r, data) {
       res.send(data)
     })
@@ -49,7 +49,7 @@ routes.get('/popular/musicvideos', function(req, res) {
   request.get('https://www.googleapis.com/youtube/v3/playlistItems?' +
     'part=snippet,contentDetails&maxResults=20' +
     '&playlistId=PLFgquLnL59alCl_2TQvOiD5Vgm1hCaGSI' +
-    '&key=' + YOUTUBE_API_KEY,
+    '&key=' + process.env.YOUTUBE_API_KEY,
     function(e, r, data) {
       res.send(data)
     })
@@ -57,7 +57,7 @@ routes.get('/popular/musicvideos', function(req, res) {
 
 routes.get('/movie/trailers', function(req, res) {
   request.get('https://www.googleapis.com/youtube/v3/playlistItems?' +
-    '&key=' + YOUTUBE_API_KEY +
+    '&key=' + process.env.YOUTUBE_API_KEY +
     '&playlistId=PLzjFbaFzsmMT_VuMSVQxfkQIw7VNbHyVi' +
     '&type=video&chart=relavence&part=snippet,id&maxResults=20',
     function(e, r, data) {
@@ -71,7 +71,7 @@ routes.get('/latenight', function(req, res) {
   request.get('https://www.googleapis.com/youtube/v3/playlistItems?' +
     'part=snippet,contentDetails&maxResults=20' +
     '&playlistId=PLrEnWoR732-CN09YykVof2lxdI3MLOZda' +
-    '&key=' + YOUTUBE_API_KEY,
+    '&key=' + process.env.YOUTUBE_API_KEY,
     function(e, r, data) {
       res.send(data)
     })
