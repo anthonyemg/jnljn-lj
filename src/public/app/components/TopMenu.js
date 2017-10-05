@@ -13,16 +13,18 @@ class TopMenu extends React.Component {
   }
 
   searchYouTube() {
-    fetch('/videos', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({data: this.state.searchQuery}),
-    })
-    .then(res => res.json())
-    .then(data => {
-      this.props.handleVideoListUpdate(data);
-    })
-    .catch(err => console.log(err));
+    if (this.state.searchQuery.length > 0) {
+      fetch('/videos', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({data: this.state.searchQuery}),
+      })
+      .then(res => res.json())
+      .then(data => {
+        this.props.handleVideoListUpdate(data);
+      })
+      .catch(err => console.log(err));
+    }
   }
 
   handleSearchChange(e) {

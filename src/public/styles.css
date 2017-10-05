@@ -503,15 +503,6 @@ body {
 }
 
 @media (max-width: 1000px) {
-  /*.video-playerUpNext {
-    display: none;
-  }*/
-  .desktop {
-    display: none;
-  }
-  .mobile {
-    display: block;
-  }
   .video-player iframe {
       width: 854px;
       height: 480px;
@@ -545,6 +536,12 @@ body {
 }
 
 @media (max-width: 656px) {
+  .desktop {
+    display: none;
+  }
+  .mobile {
+    display: block;
+  }
 
   .video-player iframe {
     min-width: 426px;
