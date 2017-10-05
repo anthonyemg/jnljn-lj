@@ -5,11 +5,6 @@ class Comments extends React.Component {
     super(props);
   }
 
-  //.snippet.topLevelComment.authorProfileImageUrl    == img url
-  //.snippet.topLevelComment.likeCount
-  //.snippet.totalReplyCount   = reply count
-  //.snippet.publishedAt    = postime
-
   render() {
     return (
       <div className='comments-container'>
@@ -24,7 +19,8 @@ class Comments extends React.Component {
               <span className='comments-commentText'>{comment.snippet.topLevelComment.snippet.textDisplay}</span>
               <div className='comments-commentReply'>
                 <span>REPLY</span>
-                <span>{comment.snippet.topLevelComment.snippet.likeCount}</span>
+                <div dangerouslySetInnerHTML={{__html: comment.snippet.topLevelComment.snippet.likeCount}}>
+                </div>
                 <i className='fa fa-thumbs-up fa-lg' />
                 <i className='fa fa-thumbs-down fa-lg' />
               </div>

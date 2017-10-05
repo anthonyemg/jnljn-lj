@@ -6,6 +6,14 @@ class VideoList extends React.Component {
     super(props)
   }
 
+  componentDidMount() {
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
+  }
+
+  componentWillUpdate() {
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
+  }
+
   render() {
     if(this.props.videos) {
       return (
@@ -30,8 +38,8 @@ class VideoList extends React.Component {
 
                 <div className='VideoList-videoDescriptionChannelTitle'>
                   <span>{video.snippet.channelTitle}</span>
-                  <span>•</span>
-                  <span>{video.snippet.publishedAt}</span>
+                  <span className='desktop'>•</span>
+                  <span className='desktop'>{video.snippet.publishedAt}</span>
                 </div>
 
                 <span className='VideoList-videoDescriptionDescription'>

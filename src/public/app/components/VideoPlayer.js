@@ -9,6 +9,14 @@ class VideoPlayer extends React.Component {
     this.convertToDate = this.convertToDate.bind(this);
   }
 
+  componentDidMount() {
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
+  }
+
+  componentWillUpdate() {
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
+  }
+
   convertToDate(date) {
     let d = new Date(date);
     return (d.getMonth() + 1) + "-" + d.getDate() + "-" + d.getFullYear();
@@ -42,6 +50,7 @@ class VideoPlayer extends React.Component {
           {this.props.selectedVideoRelatedVideos &&
             <UpNextList
               selectedVideoRelatedVideos = {this.props.selectedVideoRelatedVideos}
+              handleSelectVideo = {this.props.handleSelectVideo}
               type = 'mobile'
             />
           }
