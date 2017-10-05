@@ -10,7 +10,9 @@ class MobileLanding extends React.Component {
         <div className='mobileLanding-wrapper'>
           {this.props.videos.map((video, idx) => (
             <div className='mobileLanding-video' key={idx} onClick={() => this.props.handleSelectVideo(video)}>
-              <img src={video.snippet.thumbnails.medium.url} />
+              <div className='mobileLanding-videoImage' >
+                <img src={video.snippet.thumbnails.high.url} />
+              </div>
               <div className='landingVideoList-description'>
                 <span className='landingVideoList-descriptionTitle'>{video.snippet.title}</span>
                 <span className='landingVideoList-descriptionSubTitle'>{video.snippet.channelTitle}</span>
