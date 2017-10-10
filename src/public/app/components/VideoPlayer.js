@@ -66,6 +66,7 @@ class VideoPlayer extends React.Component {
         {this.props.selectedVideoRelatedVideos &&
           <UpNextList
             selectedVideoRelatedVideos = {this.props.selectedVideoRelatedVideos}
+            handleSelectVideo = {this.props.handleSelectVideo}
             type = 'desktop'
           />
         }

@@ -206,7 +206,7 @@ class App extends React.Component {
         />
 
         {this.state.trendingVideos && this.state.popularMusicVideos && this.state.movieTrailers && this.state.lateNight && !this.state.videos && !this.state.selectedVideo &&
-          <div className='landingVideoList-wrapper desktop'>
+          <div className='landingVideoList-wrapper desktopLanding'>
             <LandingVideoList
               videos={this.state.trendingVideos}
               title='Trending'
