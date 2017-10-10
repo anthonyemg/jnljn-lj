@@ -271,15 +271,15 @@ body {
 }
 
 .video-player iframe {
-  width: 640px;
-  height: 360px;
+  width: 1280px;
+  height: 720px;
   border: none;
 }
 
 .video-playerLeftColumn {
   display: flex;
   flex-direction: column;
-  width: 640px;
+  width: 1280px;
 }
 
 .video-playerDetailsTitle {
@@ -291,12 +291,16 @@ body {
 }
 
 .video-playerDetailsText {
-  display: flex;
-  flex-direction: column;
   font-size: 14px;
   height: 104px;
   overflow: hidden;
   margin-bottom: 20px;
+}
+
+.video-playerDetailsWrapper {
+  width: 615px;
+  display: flex;
+  flex-direction: column;
 }
 
 .video-playerChannelTitle {
@@ -471,6 +475,7 @@ body {
 
 .comments-commentText {
   font-weight: 400;
+  max-width: 740px;
 }
 
 .comments-commentReply {
@@ -521,10 +526,49 @@ body {
   margin-bottom: -63px;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1720px), (max-height: 980px) {
   .video-player iframe {
+    width: 854px;
+    height: 480px;
+  }
+  .video-playerLeftColumn {
+    width: 854px;
+  }
+}
+
+@media (max-width: 1293px) {
+  .video-player iframe {
+    width: 640px;
+    height: 360px;
+  }
+  .video-playerLeftColumn {
+    width: 640px;
+  }
+  .comments-commentText {
+    max-width: 544px;
+  }
+}
+
+@media (max-width: 1000px) {
+  /*.video-player iframe {
       width: 854px;
       height: 480px;
+  }*/
+  /*.video-playerLeftColumn {
+    width: 854px;
+  }*/
+  .desktop {
+    display: none;
+  }
+  .desktopLanding {
+    display: none;
+  }
+  .mobile {
+    display: block;
+  }
+  .video-player iframe {
+    width: 854px;
+    height: 480px;
   }
   .video-playerLeftColumn {
     width: 854px;
@@ -555,7 +599,7 @@ body {
 }
 
 @media (max-width: 656px) {
-  .desktop {
+  /*.desktop {
     display: none;
   }
   .desktopLanding {
@@ -563,7 +607,7 @@ body {
   }
   .mobile {
     display: block;
-  }
+  }*/
 
   .video-player iframe {
     min-width: 426px;
@@ -582,6 +626,9 @@ body {
     margin-top: 0px;
     display: flex;
     justify-content: center;
+  }
+  .video-playerDetailsWrapper {
+    width: 360px;
   }
   .TopMenuMobile-bottom {
     display: none;

@@ -40,9 +40,11 @@ class VideoPlayer extends React.Component {
               <span>{this.props.selectedVideo.snippet.title}</span>
             </div>
             <div className='video-playerDetailsText'>
-              <span className='video-playerChannelTitle'>{this.props.selectedVideo.snippet.channelTitle}</span>
-              <span className='video-playerPublishedAt'>Published on {this.convertToDate(this.props.selectedVideo.snippet.publishedAt)}</span>
-              <span className='video-playerDescription'>{this.props.selectedVideo.snippet.description}</span>
+              <div className='video-playerDetailsWrapper'>
+                <span className='video-playerChannelTitle'>{this.props.selectedVideo.snippet.channelTitle}</span>
+                <span className='video-playerPublishedAt'>Published on {this.convertToDate(this.props.selectedVideo.snippet.publishedAt)}</span>
+                <span className='video-playerDescription'>{this.props.selectedVideo.snippet.description}</span>
+              </div>
             </div>
 
           </div>
