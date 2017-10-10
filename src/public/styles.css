@@ -475,7 +475,7 @@ body {
 
 .comments-commentText {
   font-weight: 400;
-  max-width: 740px;
+  max-width: 1184px;
 }
 
 .comments-commentReply {
@@ -534,6 +534,9 @@ body {
   .video-playerLeftColumn {
     width: 854px;
   }
+  .comments-commentText {
+    max-width: 758px;
+  }
 }
 
 @media (max-width: 1293px) {
@@ -573,6 +576,9 @@ body {
   .video-playerLeftColumn {
     width: 854px;
   }
+  .comments-commentText {
+    max-width: 750px;
+  }
 }
 
 @media (max-width: 856px) {
@@ -582,6 +588,9 @@ body {
   }
   .video-playerLeftColumn {
     width: 640px;
+  }
+  .comments-commentText {
+    max-width: 540px;
   }
 }
 
@@ -669,6 +678,9 @@ body {
   }
   .VideoList-videoDescriptionChannelTitle span {
     font-weight: 400;
+  }
+  .comments-commentText {
+    max-width: 330px;
   }
 }
 
