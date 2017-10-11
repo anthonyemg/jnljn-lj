@@ -4,16 +4,16 @@ import Comments from './Comments';
 import UpNextList from './UpNextList';
 
 class VideoPlayer extends React.Component {
-
   constructor(props) {
     super(props);
+    this.state = {
+      autoplay: true,
+    }
     this.convertToDate = this.convertToDate.bind(this);
     this.handleEndedVideo = this.handleEndedVideo.bind(this);
+    this.handleAutoplayCheck = this.handleAutoplayCheck.bind(this);
   }
   componentDidMount() {
-    document.body.scrollTop = document.documentElement.scrollTop = 0;
-  }
-  componentWillUpdate() {
     document.body.scrollTop = document.documentElement.scrollTop = 0;
   }
   convertToDate(date) {
@@ -21,7 +21,13 @@ class VideoPlayer extends React.Component {
     return (d.getMonth() + 1) + '-' + d.getDate() + '-' + d.getFullYear();
   }
   handleEndedVideo() {
-    this.props.handleSelectVideo(this.props.selectedVideoRelatedVideos[0])
+    this.props.handleSelectVideo(this.props.upNextVideo)
+  }
+  handleAutoplayCheck() {
+    let update = this.state.autoplay ? false : true;
+    this.setState({
+      autoplay: update,
+    })
   }
   render() {
     return (
@@ -31,7 +37,7 @@ class VideoPlayer extends React.Component {
             <YouTube
               videoId={this.props.selectedVideoId}
               onEnd={this.handleEndedVideo}
-              opts={{ playerVars: { autoplay: 1 } }}
+              opts={this.state.autoplay ? {playerVars:{ autoplay: 1}} : {playerVars:{ autoplay: 0}}}
             />
           </div>
           <div className='video-playerDetails'>
@@ -46,10 +52,13 @@ class VideoPlayer extends React.Component {
               </div>
             </div>
           </div>
-          {this.props.selectedVideoRelatedVideos &&
+          {this.props.upNextVideoList &&
             <UpNextList
-              selectedVideoRelatedVideos = {this.props.selectedVideoRelatedVideos}
+              upNextVideo = {this.props.upNextVideo}
+              upNextVideoList = {this.props.upNextVideoList}
               handleSelectVideo = {this.props.handleSelectVideo}
+              handleAutoplayCheck = {this.handleAutoplayCheck}
+              autoplay = {this.state.autoplay}
               type = 'mobile'
             />
           }
@@ -59,10 +68,13 @@ class VideoPlayer extends React.Component {
             />
           }
         </div>
-        {this.props.selectedVideoRelatedVideos &&
+        {this.props.upNextVideoList &&
           <UpNextList
-            selectedVideoRelatedVideos = {this.props.selectedVideoRelatedVideos}
+            upNextVideo = {this.props.upNextVideo}
+            upNextVideoList = {this.props.upNextVideoList}
             handleSelectVideo = {this.props.handleSelectVideo}
+            handleAutoplayCheck = {this.handleAutoplayCheck}
+            autoplay = {this.state.autoplay}
             type = 'desktop'
           />
         }

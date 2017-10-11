@@ -8,7 +8,6 @@ import LandingVideoList from './LandingVideoList';
 import MobileLanding from './MobileLanding';
 
 class App extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -17,7 +16,8 @@ class App extends React.Component {
       selectedVideo: null,
       selectedVideoId: null,
       selectedVideoComments: null,
-      selectedVideoRelatedVideos: null,
+      upNextVideo: null,
+      upNextVideoList: null,
       trendingVideos: null,
       popularMusicVideos: null,
       movieTrailers: null,
@@ -34,21 +34,19 @@ class App extends React.Component {
     this.fetchLateNight = this.fetchLateNight.bind(this);
     this.handleYuoTubePress = this.handleYuoTubePress.bind(this);
     this.convertDate = this.convertDate.bind(this);
+    this.handleUpNextVideos = this.handleUpNextVideos.bind(this);
   }
-
   componentWillMount() {
     this.fetchTrending();
     this.fetchPopularMusicVideos();
     this.fetchMovieTrailers();
     this.fetchLateNight();
   }
-
   componentDidMount() {
     this.setState({
       landingVideoList: true,
     })
   }
-
   handleVideoListUpdate(data) {
     this.setState({
       videos: data.items,
@@ -57,7 +55,6 @@ class App extends React.Component {
       selectedVideoComments: null,
     })
   }
-
   numberWithCommas(x) {
     x = x.toString();
     var pattern = /(-?\d+)(\d{3})/;
@@ -65,7 +62,6 @@ class App extends React.Component {
         x = x.replace(pattern, "$1,$2");
     return x;
   }
-
   handleSelectVideo(video) {
     var id;
     if (video.kind === 'youtube#playlistItem') {
@@ -82,7 +78,6 @@ class App extends React.Component {
     this.handleFetchComments(id);
     this.fetchRelatedVideos(id);
   }
-
   handleFetchComments(videoId) {
     fetch('/comments', {
       method: 'POST',
@@ -97,7 +92,6 @@ class App extends React.Component {
     })
     .catch(err => console.log(err));
   }
-
   fetchRelatedVideos(videoId) {
     fetch('/related/videos', {
       method: 'POST',
@@ -106,13 +100,18 @@ class App extends React.Component {
     })
     .then(res => res.json())
     .then(data => {
-      this.setState({
-        selectedVideoRelatedVideos: data.items,
-      })
+      this.handleUpNextVideos(data.items)
     })
     .catch(err => console.log(err));
   }
-
+  handleUpNextVideos(list) {
+    let random = Math.floor(list.length * Math.random());
+    let upNextVideo = list.splice(random, 1);
+    this.setState({
+      upNextVideo: upNextVideo[0],
+      upNextVideoList: list,
+    })
+  }
   fetchTrending() {
     fetch('/trending', {
       method: 'GET',
@@ -125,7 +124,6 @@ class App extends React.Component {
     })
     .catch(err => console.log(err));
   }
-
   fetchPopularMusicVideos() {
     fetch('/popular/musicvideos', {method: 'GET'})
       .then(res => res.json())
@@ -136,7 +134,6 @@ class App extends React.Component {
       })
       .catch(err => console.log(err));
   }
-
   fetchMovieTrailers() {
     fetch('/movie/trailers', {method: 'GET'})
       .then(res => res.json())
@@ -147,7 +144,6 @@ class App extends React.Component {
       })
       .catch(err => console.log(err));
   }
-
   fetchLateNight() {
     fetch('/latenight', {method: 'GET'})
       .then(res => res.json())
@@ -158,7 +154,6 @@ class App extends React.Component {
       })
       .catch(err => console.log(err));
   }
-
   handleYuoTubePress() {
     this.setState({
       selectedVideo: null,
@@ -166,7 +161,6 @@ class App extends React.Component {
       videos: null,
     })
   }
-
   convertDate(date) {
     let videoDate = new Date(date);
     let currentDate = new Date();
@@ -189,22 +183,18 @@ class App extends React.Component {
       return '1 hour ago';
     }
   }
-
   render() {
     return (
       <div className='App'>
-
         <TopMenu
           handleVideoListUpdate={this.handleVideoListUpdate}
           handleYuoTubePress={this.handleYuoTubePress}
         />
-
         <TopMenuMobile
           handleVideoListUpdate={this.handleVideoListUpdate}
           handleYuoTubePress={this.handleYuoTubePress}
           selectedVideo={this.state.selectedVideo}
         />
-
         {this.state.trendingVideos && this.state.popularMusicVideos && this.state.movieTrailers && this.state.lateNight && !this.state.videos && !this.state.selectedVideo &&
           <div className='landingVideoList-wrapper desktopLanding'>
             <LandingVideoList
@@ -233,16 +223,13 @@ class App extends React.Component {
             />
           </div>
         }
-
         {this.state.trendingVideos && !this.state.selectedVideo && !this.state.videos &&
           <MobileLanding
             videos={this.state.trendingVideos}
-            // title='Trending'
             handleSelectVideo={this.handleSelectVideo}
             convertDate={this.convertDate}
           />
         }
-
         {this.state.videos && !this.state.selectedVideo &&
           <VideoList
             videos={this.state.videos}
@@ -250,18 +237,17 @@ class App extends React.Component {
             handleSelectVideo={this.handleSelectVideo}
           />
         }
-
         {this.state.selectedVideo &&
           <VideoPlayer
             selectedVideo={this.state.selectedVideo}
             selectedVideoId={this.state.selectedVideoId}
             handleSelectVideo={this.handleSelectVideo}
             selectedVideoComments={this.state.selectedVideoComments}
-            selectedVideoRelatedVideos={this.state.selectedVideoRelatedVideos}
+            upNextVideo={this.state.upNextVideo}
+            upNextVideoList={this.state.upNextVideoList}
             handleSelectVideo={this.handleSelectVideo}
           />
         }
-
       </div>
     )
   }
